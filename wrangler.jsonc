@@ -1,14 +1,20 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "10x-astro-starter",
+  "name": "budget-flow",
   "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-05-08",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "binding": "ASSETS",
-    "directory": "./dist",
+    "directory": "./dist/client",
     "not_found_handling": "404-page",
   },
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "1591a012051548f2bfedad992132a4d9"
+    }
+  ],
   "observability": {
     "enabled": true,
   },
