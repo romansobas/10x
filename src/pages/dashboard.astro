@@ -1,27 +1,80 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import ExpenseForm from "@/components/expenses/ExpenseForm";
+import { createClient } from "@/lib/supabase";
+import { getUserCategories, seedDefaultCategories } from "@/lib/services/categories";
+import { getMonthBreakdown } from "@/lib/services/expenses";
+import type { CategoryTotal } from "@/lib/services/expenses";
+import type { Category } from "@/types";
 
 const { user } = Astro.locals;
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+const serverError = Astro.url.searchParams.get("error");
+
+let categories: Category[] = [];
+let breakdown: CategoryTotal[] = [];
+
+if (supabase && user) {
+  categories = await getUserCategories(supabase, user.id);
+  if (categories.length === 0) {
+    await seedDefaultCategories(supabase, user.id);
+    categories = await getUserCategories(supabase, user.id);
+  }
+  const now = new Date();
+  breakdown = await getMonthBreakdown(supabase, user.id, now.getFullYear(), now.getMonth() + 1);
+}
+
+const now = new Date();
+const monthLabel = now.toLocaleString("en-US", { month: "long", year: "numeric" });
 ---
 
-<Layout title="Dashboard">
-  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
-    <div class="rounded-2xl border border-white/10 bg-white/10 p-8 text-center text-white backdrop-blur-xl">
-      <h1 class="mb-4 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-3xl font-bold text-transparent">
-        Dashboard
-      </h1>
-      <p class="text-blue-100/80">
-        Welcome, <span class="font-semibold text-white">{user?.email}</span>
-      </p>
-      <p class="mt-2 text-sm text-blue-100/50">This page is only for authenticated users.</p>
-      <form method="POST" action="/api/auth/signout" class="mt-6">
-        <button
-          type="submit"
-          class="rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm transition-colors hover:bg-white/20"
-        >
-          Sign out
-        </button>
-      </form>
+<Layout title="Dashboard — BudgetFlow">
+  <div class="bg-cosmic min-h-screen p-4">
+    <div class="mx-auto max-w-md space-y-6 py-6">
+      <!-- Header -->
+      <div class="flex items-center justify-between text-white">
+        <div>
+          <h1 class="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
+            BudgetFlow
+          </h1>
+          <p class="text-sm text-blue-100/60">{user?.email}</p>
+        </div>
+        <form method="POST" action="/api/auth/signout">
+          <button
+            type="submit"
+            class="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20"
+          >
+            Sign out
+          </button>
+        </form>
+      </div>
+
+      <!-- Add expense card -->
+      <div class="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
+        <h2 class="mb-4 text-lg font-semibold text-white">Add expense</h2>
+        <ExpenseForm categories={categories} defaultError={serverError} client:load />
+      </div>
+
+      <!-- Month-to-date breakdown card -->
+      <div class="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
+        <h2 class="mb-1 text-lg font-semibold text-white">This month</h2>
+        <p class="mb-4 text-sm text-blue-100/60">{monthLabel}</p>
+
+        {
+          breakdown.length === 0 ? (
+            <p class="text-center text-sm text-blue-100/50">No expenses yet this month.</p>
+          ) : (
+            <ul class="space-y-2">
+              {breakdown.map((item) => (
+                <li class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-3">
+                  <span class="text-sm font-medium text-white">{item.category_name}</span>
+                  <span class="text-sm font-semibold text-blue-200">{item.total.toFixed(2)}</span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
     </div>
   </div>
 </Layout>

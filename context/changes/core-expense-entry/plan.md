@@ -449,27 +449,27 @@ runner configured.
 
 #### Automated
 
-- [x] 2.1 `npm run lint` passes for SelectField and ExpenseForm
-- [x] 2.2 `npm run build` passes
+- [x] 2.1 `npm run lint` passes for SelectField and ExpenseForm — 33c3f12
+- [x] 2.2 `npm run build` passes — 33c3f12
 
 #### Manual
 
-- [x] 2.3 (No standalone manual check — integration verified in Phase 3)
+- [x] 2.3 (No standalone manual check — integration verified in Phase 3) — 33c3f12
 
 ### Phase 3: Dashboard Rebuild
 
 #### Automated
 
-- [ ] 3.1 `npm run lint` passes for rebuilt dashboard.astro
-- [ ] 3.2 `npm run build` passes end-to-end
+- [x] 3.1 `npm run lint` passes for rebuilt dashboard.astro
+- [x] 3.2 `npm run build` passes end-to-end
 
 #### Manual
 
-- [ ] 3.3 Default categories appear in select on first visit
-- [ ] 3.4 Seeding is idempotent (two-tab race produces no error)
-- [ ] 3.5 Submitting a valid expense updates the breakdown correctly
-- [ ] 3.6 Multiple expenses aggregate and sort correctly
-- [ ] 3.7 Invalid input (empty amount, zero, negative) shows inline errors without reload
-- [ ] 3.8 Empty state renders correctly before first expense
-- [ ] 3.9 All interactions work on a mobile browser
-- [ ] 3.10 RLS isolation verified via second browser session (different account sees empty breakdown)
+- [x] 3.3 Default categories appear in select on first visit
+- [x] 3.4 Seeding is idempotent (two-tab race produces no error)
+- [x] 3.5 Submitting a valid expense updates the breakdown correctly
+- [x] 3.6 Multiple expenses aggregate and sort correctly
+- [x] 3.7 Invalid input (empty amount, zero, negative) shows inline errors without reload
+- [x] 3.8 Empty state renders correctly before first expense
+- [x] 3.9 All interactions work on a mobile browser
+- [x] 3.10 RLS isolation verified via second browser session (different account sees empty breakdown)
