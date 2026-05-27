@@ -438,23 +438,23 @@ runner configured.
 
 #### Automated
 
-- [x] 1.1 `npm run lint` passes across all four new files
-- [x] 1.2 `npm run build` passes
+- [x] 1.1 `npm run lint` passes across all four new files — 64626d9
+- [x] 1.2 `npm run build` passes — 64626d9
 
 #### Manual
 
-- [x] 1.3 (No standalone manual check — integration verified in Phase 3)
+- [x] 1.3 (No standalone manual check — integration verified in Phase 3) — 64626d9
 
 ### Phase 2: Expense Form Components
 
 #### Automated
 
-- [ ] 2.1 `npm run lint` passes for SelectField and ExpenseForm
-- [ ] 2.2 `npm run build` passes
+- [x] 2.1 `npm run lint` passes for SelectField and ExpenseForm
+- [x] 2.2 `npm run build` passes
 
 #### Manual
 
-- [ ] 2.3 (No standalone manual check — integration verified in Phase 3)
+- [x] 2.3 (No standalone manual check — integration verified in Phase 3)
 
 ### Phase 3: Dashboard Rebuild
 
