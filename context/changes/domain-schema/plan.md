@@ -399,23 +399,23 @@ during development. To apply to a remote Supabase project: `npx supabase db push
 
 #### Automated
 
-- [x] 1.1 `npx supabase db reset` completes without errors
-- [x] 1.2 `npm run build` passes
+- [x] 1.1 `npx supabase db reset` completes without errors — 0d2b9d0
+- [x] 1.2 `npm run build` passes — 0d2b9d0
 
 #### Manual
 
-- [x] 1.3 All three tables visible in Supabase Studio with correct columns
-- [x] 1.4 RLS shown as enabled on all three tables
-- [x] 1.5 RLS row isolation verified via SQL editor query
+- [x] 1.3 All three tables visible in Supabase Studio with correct columns — 0d2b9d0
+- [x] 1.4 RLS shown as enabled on all three tables — 0d2b9d0
+- [x] 1.5 RLS row isolation verified via SQL editor query — 0d2b9d0
 
 ### Phase 2: TypeScript Types
 
 #### Automated
 
-- [ ] 2.1 `npm run lint` passes with no TypeScript errors
-- [ ] 2.2 `npm run build` passes end-to-end
+- [x] 2.1 `npm run lint` passes with no TypeScript errors
+- [x] 2.2 `npm run build` passes end-to-end
 
 #### Manual
 
-- [ ] 2.3 IDE autocomplete shows table names on `createClient(…).from(`
-- [ ] 2.4 Non-existent column reference causes a TypeScript error
+- [x] 2.3 IDE autocomplete shows table names on `createClient(…).from(`
+- [x] 2.4 Non-existent column reference causes a TypeScript error
