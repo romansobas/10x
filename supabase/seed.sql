@@ -1,0 +1,2 @@
+-- Seed file intentionally empty.
+-- Default categories are hard-coded in application code, not seeded into the DB.
