@@ -412,10 +412,10 @@ during development. To apply to a remote Supabase project: `npx supabase db push
 
 #### Automated
 
-- [x] 2.1 `npm run lint` passes with no TypeScript errors
-- [x] 2.2 `npm run build` passes end-to-end
+- [x] 2.1 `npm run lint` passes with no TypeScript errors — 584dbd1
+- [x] 2.2 `npm run build` passes end-to-end — 584dbd1
 
 #### Manual
 
-- [x] 2.3 IDE autocomplete shows table names on `createClient(…).from(`
-- [x] 2.4 Non-existent column reference causes a TypeScript error
+- [x] 2.3 IDE autocomplete shows table names on `createClient(…).from(` — 584dbd1
+- [x] 2.4 Non-existent column reference causes a TypeScript error — 584dbd1
