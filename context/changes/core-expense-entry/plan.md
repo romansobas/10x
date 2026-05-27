@@ -460,16 +460,16 @@ runner configured.
 
 #### Automated
 
-- [x] 3.1 `npm run lint` passes for rebuilt dashboard.astro
-- [x] 3.2 `npm run build` passes end-to-end
+- [x] 3.1 `npm run lint` passes for rebuilt dashboard.astro — 27c7543
+- [x] 3.2 `npm run build` passes end-to-end — 27c7543
 
 #### Manual
 
-- [x] 3.3 Default categories appear in select on first visit
-- [x] 3.4 Seeding is idempotent (two-tab race produces no error)
-- [x] 3.5 Submitting a valid expense updates the breakdown correctly
-- [x] 3.6 Multiple expenses aggregate and sort correctly
-- [x] 3.7 Invalid input (empty amount, zero, negative) shows inline errors without reload
-- [x] 3.8 Empty state renders correctly before first expense
-- [x] 3.9 All interactions work on a mobile browser
-- [x] 3.10 RLS isolation verified via second browser session (different account sees empty breakdown)
+- [x] 3.3 Default categories appear in select on first visit — 27c7543
+- [x] 3.4 Seeding is idempotent (two-tab race produces no error) — 27c7543
+- [x] 3.5 Submitting a valid expense updates the breakdown correctly — 27c7543
+- [x] 3.6 Multiple expenses aggregate and sort correctly — 27c7543
+- [x] 3.7 Invalid input (empty amount, zero, negative) shows inline errors without reload — 27c7543
+- [x] 3.8 Empty state renders correctly before first expense — 27c7543
+- [x] 3.9 All interactions work on a mobile browser — 27c7543
+- [x] 3.10 RLS isolation verified via second browser session (different account sees empty breakdown) — 27c7543
