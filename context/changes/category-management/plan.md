@@ -334,17 +334,17 @@ Template (following dashboard.astro dark-glass layout):
 ### Phase 2: Categories Page and Dashboard Link
 
 #### Automated
-- [x] 2.1 Create `src/pages/categories.astro`
-- [x] 2.2 Add `"/categories"` to `PROTECTED_ROUTES` in `src/middleware.ts`
-- [x] 2.3 Add "Manage categories" link to `src/pages/dashboard.astro`
-- [x] 2.4 `npm run lint && npm run build` passes
+- [x] 2.1 Create `src/pages/categories.astro` — 3a2e1c3
+- [x] 2.2 Add `"/categories"` to `PROTECTED_ROUTES` in `src/middleware.ts` — 3a2e1c3
+- [x] 2.3 Add "Manage categories" link to `src/pages/dashboard.astro` — 3a2e1c3
+- [x] 2.4 `npm run lint && npm run build` passes — 3a2e1c3
 
 #### Manual
-- [ ] 2.M1 Unauthenticated visit to `/categories` redirects to `/auth/signin`
-- [ ] 2.M2 Category list renders with name and expense count per row
-- [ ] 2.M3 Adding a valid category name updates the list
-- [ ] 2.M4 Submitting a duplicate name shows error banner
-- [ ] 2.M5 Deleting a category with 0 expenses removes it from the list
-- [ ] 2.M6 Deleting a category with expenses shows "has expenses" error banner
-- [ ] 2.M7 At 20 categories, add form is replaced with cap message
-- [ ] 2.M8 "Manage categories" link on dashboard navigates to `/categories`
+- [x] 2.M1 Unauthenticated visit to `/categories` redirects to `/auth/signin`
+- [x] 2.M2 Category list renders with name and expense count per row
+- [x] 2.M3 Adding a valid category name updates the list
+- [x] 2.M4 Submitting a duplicate name shows error banner
+- [x] 2.M5 Deleting a category with 0 expenses removes it from the list
+- [x] 2.M6 Deleting a category with expenses shows "has expenses" error banner
+- [x] 2.M7 At 20 categories, add form is replaced with cap message
+- [x] 2.M8 "Manage categories" link on dashboard navigates to `/categories`
