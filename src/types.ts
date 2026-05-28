@@ -6,6 +6,10 @@ export interface Category {
   updated_at: string;
 }
 
+export interface CategoryWithCount extends Category {
+  expense_count: number; // total expenses (all time) referencing this category
+}
+
 export interface Expense {
   id: string;
   user_id: string;
