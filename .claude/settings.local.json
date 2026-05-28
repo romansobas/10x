@@ -16,7 +16,8 @@
       "Read",
       "Edit",
       "Write",
-      "Bash(git reset *)"
+      "Bash(git reset *)",
+      "Bash(echo \"EXIT:$?\")"
     ],
     "deny": [
       "Bash(rm -rf *)"

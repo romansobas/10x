@@ -322,11 +322,11 @@ Template (following dashboard.astro dark-glass layout):
 ### Phase 1: Data Layer and API Endpoints
 
 #### Automated
-- [x] 1.1 Add `CategoryWithCount` type to `src/types.ts`
-- [x] 1.2 Add `getCategoriesWithExpenseCounts`, `createCategory`, `deleteCategory` to `src/lib/services/categories.ts`
-- [x] 1.3 Create `src/pages/api/categories/index.ts` (POST — create)
-- [x] 1.4 Create `src/pages/api/categories/[id].ts` (POST — delete)
-- [x] 1.5 `npm run lint && npm run build` passes
+- [x] 1.1 Add `CategoryWithCount` type to `src/types.ts` — 29fd96e
+- [x] 1.2 Add `getCategoriesWithExpenseCounts`, `createCategory`, `deleteCategory` to `src/lib/services/categories.ts` — 29fd96e
+- [x] 1.3 Create `src/pages/api/categories/index.ts` (POST — create) — 29fd96e
+- [x] 1.4 Create `src/pages/api/categories/[id].ts` (POST — delete) — 29fd96e
+- [x] 1.5 `npm run lint && npm run build` passes — 29fd96e
 
 #### Manual
 - [ ] 1.M (no manual steps — UI built in Phase 2)
@@ -334,10 +334,10 @@ Template (following dashboard.astro dark-glass layout):
 ### Phase 2: Categories Page and Dashboard Link
 
 #### Automated
-- [ ] 2.1 Create `src/pages/categories.astro`
-- [ ] 2.2 Add `"/categories"` to `PROTECTED_ROUTES` in `src/middleware.ts`
-- [ ] 2.3 Add "Manage categories" link to `src/pages/dashboard.astro`
-- [ ] 2.4 `npm run lint && npm run build` passes
+- [x] 2.1 Create `src/pages/categories.astro`
+- [x] 2.2 Add `"/categories"` to `PROTECTED_ROUTES` in `src/middleware.ts`
+- [x] 2.3 Add "Manage categories" link to `src/pages/dashboard.astro`
+- [x] 2.4 `npm run lint && npm run build` passes
 
 #### Manual
 - [ ] 2.M1 Unauthenticated visit to `/categories` redirects to `/auth/signin`
