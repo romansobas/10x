@@ -14,6 +14,7 @@ export interface CategoryTotal {
   category_id: string;
   category_name: string;
   total: number;
+  limit?: number; // monthly budget limit; undefined if no limit is set for this category
 }
 
 export async function getMonthBreakdown(
@@ -27,7 +28,7 @@ export async function getMonthBreakdown(
   const lastDayNum = new Date(year, month, 0).getDate();
   const lastDay = `${year}-${mm}-${String(lastDayNum).padStart(2, "0")}`;
 
-  const [expensesResult, categoriesResult] = await Promise.all([
+  const [expensesResult, categoriesResult, limitsResult] = await Promise.all([
     supabase
       .from("expenses")
       .select("amount, category_id")
@@ -35,12 +36,15 @@ export async function getMonthBreakdown(
       .gte("expense_date", firstDay)
       .lte("expense_date", lastDay),
     supabase.from("categories").select("id, name").eq("user_id", userId),
+    supabase.from("budget_limits").select("category_id, monthly_limit").eq("user_id", userId),
   ]);
 
   if (expensesResult.error) throw expensesResult.error;
   if (categoriesResult.error) throw categoriesResult.error;
+  if (limitsResult.error) throw limitsResult.error;
 
   const catMap = new Map(categoriesResult.data.map((c) => [c.id, c.name]));
+  const limitsMap = new Map(limitsResult.data.map((l) => [l.category_id, l.monthly_limit]));
 
   const totals = new Map<string, number>();
   for (const exp of expensesResult.data) {
@@ -53,6 +57,7 @@ export async function getMonthBreakdown(
       category_id,
       category_name: catMap.get(category_id) ?? "Unknown",
       total,
+      limit: limitsMap.get(category_id),
     }))
     .sort((a, b) => b.total - a.total);
 }
