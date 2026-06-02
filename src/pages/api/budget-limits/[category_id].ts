@@ -31,7 +31,7 @@ export const POST: APIRoute = async (context) => {
     }
   }
 
-  const limitRaw = form.get("limit") as string;
+  const limitRaw = (form.get("limit") as string | null)?.trim();
   const amount = parseFloat(limitRaw);
   if (!limitRaw || isNaN(amount) || amount <= 0) {
     return context.redirect(`/categories?error=${encodeURIComponent("Budget limit must be a positive number.")}`);

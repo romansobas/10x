@@ -1,11 +1,13 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/database.types";
-import type { BudgetLimit } from "@/types";
 
-export async function getBudgetLimits(supabase: SupabaseClient<Database>, userId: string): Promise<BudgetLimit[]> {
+// Returns budget limits typed as the DB Row (monthly_limit: number per database.types.ts).
+// database.types.ts and types.ts disagree on whether monthly_limit is number or string;
+// this function returns the raw DB type so callers get the correct number type directly.
+export async function getBudgetLimits(supabase: SupabaseClient<Database>, userId: string) {
   const { data, error } = await supabase.from("budget_limits").select("*").eq("user_id", userId);
   if (error) throw error;
-  return data as unknown as BudgetLimit[];
+  return data;
 }
 
 export async function upsertBudgetLimit(

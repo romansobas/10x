@@ -1,7 +1,7 @@
 ---
 change_id: budget-limits
 title: Per-category monthly budget limits with overrun markers
-status: implemented
+status: impl_reviewed
 created: 2026-06-02
 updated: 2026-06-02
 archived_at: null

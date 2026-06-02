@@ -18,7 +18,7 @@ if (supabase && user) {
     getBudgetLimits(supabase, user.id),
   ]);
   categories = cats;
-  limitsMap = new Map(limits.map((l) => [l.category_id, parseFloat(l.monthly_limit)]));
+  limitsMap = new Map(limits.map((l) => [l.category_id, l.monthly_limit]));
 }
 
 const atCap = categories.length >= 20;
