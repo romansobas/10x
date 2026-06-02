@@ -1,6 +1,35 @@
 import type { APIRoute } from "astro";
 import { createClient } from "@/lib/supabase";
-import { addExpense } from "@/lib/services/expenses";
+import { addExpense, getMonthExpenses } from "@/lib/services/expenses";
+
+// Returns JSON — called via fetch() from ExpenseList, not from an HTML form,
+// so redirects would be silently swallowed.
+export const GET: APIRoute = async (context) => {
+  const supabase = createClient(context.request.headers, context.cookies);
+  if (!supabase) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const params = context.url.searchParams;
+  const now = new Date();
+  const year = parseInt(params.get("year") ?? "") || now.getFullYear();
+  const month = parseInt(params.get("month") ?? "") || now.getMonth() + 1;
+  const categoryId = params.get("category_id") ?? undefined;
+
+  try {
+    const expenses = await getMonthExpenses(supabase, user.id, year, month, categoryId);
+    return Response.json(expenses);
+  } catch {
+    return Response.json({ error: "Failed to fetch expenses" }, { status: 500 });
+  }
+};
 
 export const POST: APIRoute = async (context) => {
   const supabase = createClient(context.request.headers, context.cookies);

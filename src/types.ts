@@ -20,6 +20,10 @@ export interface Expense {
   updated_at: string;
 }
 
+export interface ExpenseWithCategory extends Expense {
+  category_name: string;
+}
+
 export interface BudgetLimit {
   id: string;
   user_id: string;
