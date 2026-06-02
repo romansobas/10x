@@ -3,7 +3,7 @@ project: "BudgetFlow"
 version: 1
 status: draft
 created: 2026-05-27
-updated: 2026-05-27
+updated: 2026-06-02
 prd_version: 1
 main_goal: market-feedback
 top_blocker: capacity
@@ -33,7 +33,7 @@ Every month, household budget managers discover they overspent — but cannot id
 | S-01 | core-expense-entry  | add an expense with a category and see the month-to-date breakdown | F-01       | FR-003, FR-007, FR-012, US-01         | proposed |
 | S-02 | category-management | add custom categories and delete unused ones                    | S-01          | FR-004, FR-006                        | proposed |
 | S-03 | expense-management  | browse, filter, edit, and delete expenses by month              | S-01          | FR-008, FR-009, FR-010, FR-011        | proposed |
-| S-04 | budget-limits       | set a monthly budget limit per category and see overrun markers | S-01, S-02    | FR-017                                | proposed |
+| S-04 | budget-limits       | set a monthly budget limit per category and see overrun markers | S-01, S-02    | FR-017                                | done     |
 | S-05 | auth-extended       | explore the app as a guest and reset a forgotten password       | —             | FR-001, FR-002, FR-015, FR-016        | ready    |
 
 ## Streams
@@ -121,7 +121,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** The budget overrun calculation (amount spent vs. limit, delta) is the core business logic of the PRD; a calculation error produces misleading financial data for a personal finance tool. Sequenced after S-02 so the full custom category list is available when setting limits.
-- **Status:** proposed
+- **Status:** done
 
 ### S-05: Extended auth — guest access and password reset
 
@@ -161,3 +161,5 @@ Foundations below assume these are present and do NOT re-scaffold them.
 ## Done
 
 (Empty on first generation. `/10x-archive` appends an entry here — and flips that item's `Status` to `done` — when a change whose `Change ID` matches the item is archived.)
+
+- **S-04: set a monthly budget limit per category and see overrun markers** — Archived 2026-06-02 → `context/archive/2026-06-02-budget-limits/`. Lesson: —.
