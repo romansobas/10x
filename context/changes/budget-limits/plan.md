@@ -321,31 +321,31 @@ given the information density the sub-line provides.
 
 #### Automated
 
-- [x] 1.1 Add `limit?: number` to `CategoryTotal` in `src/lib/services/expenses.ts`
-- [x] 1.2 Extend `getMonthBreakdown` with third Promise.all leg for `budget_limits`
-- [x] 1.3 Create `src/lib/services/budget-limits.ts` with `getBudgetLimits`, `upsertBudgetLimit`, `deleteBudgetLimit`
-- [x] 1.4 Create `src/pages/api/budget-limits/[category_id].ts` with single `POST` handler
-- [x] 1.5 `npm run lint && npm run build` exits 0
+- [x] 1.1 Add `limit?: number` to `CategoryTotal` in `src/lib/services/expenses.ts` — 0ce55a9
+- [x] 1.2 Extend `getMonthBreakdown` with third Promise.all leg for `budget_limits` — 0ce55a9
+- [x] 1.3 Create `src/lib/services/budget-limits.ts` with `getBudgetLimits`, `upsertBudgetLimit`, `deleteBudgetLimit` — 0ce55a9
+- [x] 1.4 Create `src/pages/api/budget-limits/[category_id].ts` with single `POST` handler — 0ce55a9
+- [x] 1.5 `npm run lint && npm run build` exits 0 — 0ce55a9
 
 #### Manual
 
-- [x] 1.M No manual steps — UI built in Phases 2 and 3
+- [x] 1.M No manual steps — UI built in Phases 2 and 3 — 0ce55a9
 
 ### Phase 2: Categories Page — Set/Remove Limits
 
 #### Automated
 
-- [ ] 2.1 Update `src/pages/categories.astro` frontmatter to fetch and map budget limits
-- [ ] 2.2 Update category row template with save form and conditional remove form
-- [ ] 2.3 `npm run lint && npm run build` exits 0
+- [x] 2.1 Update `src/pages/categories.astro` frontmatter to fetch and map budget limits
+- [x] 2.2 Update category row template with save form and conditional remove form
+- [x] 2.3 `npm run lint && npm run build` exits 0
 
 #### Manual
 
-- [ ] 2.M1 Categories page loads with a number input per category row
-- [ ] 2.M2 Categories with existing limits show input pre-filled
-- [ ] 2.M3 Saving a valid limit persists it (visible on reload)
-- [ ] 2.M4 Saving empty or invalid amount shows error banner
-- [ ] 2.M5 "Remove limit" link appears only when a limit is set and removes it on click
+- [x] 2.M1 Categories page loads with a number input per category row
+- [x] 2.M2 Categories with existing limits show input pre-filled
+- [x] 2.M3 Saving a valid limit persists it (visible on reload)
+- [x] 2.M4 Saving empty or invalid amount shows error banner
+- [x] 2.M5 "Remove limit" link appears only when a limit is set and removes it on click
 
 ### Phase 3: Dashboard Overrun Markers
 

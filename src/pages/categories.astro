@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { createClient } from "@/lib/supabase";
 import { getCategoriesWithExpenseCounts } from "@/lib/services/categories";
+import { getBudgetLimits } from "@/lib/services/budget-limits";
 import type { CategoryWithCount } from "@/types";
 
 const { user } = Astro.locals;
@@ -9,9 +10,15 @@ const supabase = createClient(Astro.request.headers, Astro.cookies);
 const serverError = Astro.url.searchParams.get("error");
 
 let categories: CategoryWithCount[] = [];
+let limitsMap = new Map<string, number>();
 
 if (supabase && user) {
-  categories = await getCategoriesWithExpenseCounts(supabase, user.id);
+  const [cats, limits] = await Promise.all([
+    getCategoriesWithExpenseCounts(supabase, user.id),
+    getBudgetLimits(supabase, user.id),
+  ]);
+  categories = cats;
+  limitsMap = new Map(limits.map((l) => [l.category_id, parseFloat(l.monthly_limit)]));
 }
 
 const atCap = categories.length >= 20;
@@ -89,18 +96,42 @@ const atCap = categories.length >= 20;
           ) : (
             <ul class="space-y-2">
               {categories.map((cat) => (
-                <li class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-3">
-                  <div>
-                    <span class="text-sm font-medium text-white">{cat.name}</span>
-                    <span class="ml-2 text-xs text-blue-100/50">
-                      {cat.expense_count} expense{cat.expense_count !== 1 ? "s" : ""}
-                    </span>
+                <li class="space-y-2 rounded-lg border border-white/10 bg-white/5 px-4 py-3">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <span class="text-sm font-medium text-white">{cat.name}</span>
+                      <span class="ml-2 text-xs text-blue-100/50">
+                        {cat.expense_count} expense{cat.expense_count !== 1 ? "s" : ""}
+                      </span>
+                    </div>
+                    <form method="POST" action={`/api/categories/${cat.id}`}>
+                      <button type="submit" class="text-xs text-red-300/70 transition-colors hover:text-red-300">
+                        Delete
+                      </button>
+                    </form>
                   </div>
-                  <form method="POST" action={`/api/categories/${cat.id}`}>
-                    <button type="submit" class="text-xs text-red-300/70 transition-colors hover:text-red-300">
-                      Delete
+                  <form method="POST" action={`/api/budget-limits/${cat.id}`} class="flex items-center gap-2">
+                    <input
+                      type="number"
+                      name="limit"
+                      step="0.01"
+                      min="0.01"
+                      value={limitsMap.get(cat.id)?.toFixed(2) ?? ""}
+                      placeholder="No limit"
+                      class="w-24 rounded-lg border border-white/20 bg-white/10 px-2 py-1 text-sm text-white placeholder-white/40 transition-colors focus:ring-2 focus:ring-purple-400 focus:outline-none"
+                    />
+                    <button type="submit" class="text-xs text-blue-100/60 transition-colors hover:text-white">
+                      Save limit
                     </button>
                   </form>
+                  {limitsMap.has(cat.id) && (
+                    <form method="POST" action={`/api/budget-limits/${cat.id}`}>
+                      <input type="hidden" name="_action" value="remove" />
+                      <button type="submit" class="text-xs text-blue-100/40 transition-colors hover:text-blue-100/70">
+                        Remove limit
+                      </button>
+                    </form>
+                  )}
                 </li>
               ))}
             </ul>
