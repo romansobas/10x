@@ -1,0 +1,67 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { ExpenseList } from "@/components/expenses/ExpenseList";
+import { createClient } from "@/lib/supabase";
+import { getUserCategories } from "@/lib/services/categories";
+import { getMonthExpenses } from "@/lib/services/expenses";
+import type { Category, ExpenseWithCategory } from "@/types";
+
+const { user } = Astro.locals;
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+
+const now = new Date();
+const yearParam = parseInt(Astro.url.searchParams.get("year") ?? "");
+const monthParam = parseInt(Astro.url.searchParams.get("month") ?? "");
+const year = isNaN(yearParam) ? now.getFullYear() : yearParam;
+const month = isNaN(monthParam) ? now.getMonth() + 1 : monthParam;
+
+let categories: Category[] = [];
+let initialExpenses: ExpenseWithCategory[] = [];
+
+if (supabase && user) {
+  [categories, initialExpenses] = await Promise.all([
+    getUserCategories(supabase, user.id),
+    getMonthExpenses(supabase, user.id, year, month),
+  ]);
+}
+---
+
+<Layout title="Expenses — BudgetFlow">
+  <div class="bg-cosmic min-h-screen p-4">
+    <div class="mx-auto max-w-md space-y-6 py-6">
+      <!-- Header -->
+      <div class="flex items-center justify-between text-white">
+        <div>
+          <h1 class="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
+            BudgetFlow
+          </h1>
+          <p class="text-sm text-blue-100/60">{user?.email}</p>
+        </div>
+        <form method="POST" action="/api/auth/signout">
+          <button
+            type="submit"
+            class="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20"
+          >
+            Sign out
+          </button>
+        </form>
+      </div>
+
+      <!-- Back link -->
+      <a href="/dashboard" class="block text-sm text-blue-100/60 transition-colors hover:text-white">
+        ← Back to dashboard
+      </a>
+
+      <!-- Expense list card -->
+      <div class="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
+        <ExpenseList
+          client:load
+          initialExpenses={initialExpenses}
+          categories={categories}
+          initialYear={year}
+          initialMonth={month}
+        />
+      </div>
+    </div>
+  </div>
+</Layout>

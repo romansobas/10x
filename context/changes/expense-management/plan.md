@@ -404,30 +404,30 @@ page's column, currently around line 84), add:
 
 #### Automated
 
-- [x] 2.1 Create `src/components/expenses/ExpenseList.tsx` with all props, state, and behaviors
-- [x] 2.2 `npm run lint && npm run build` exits 0
+- [x] 2.1 Create `src/components/expenses/ExpenseList.tsx` with all props, state, and behaviors — 978e919
+- [x] 2.2 `npm run lint && npm run build` exits 0 — 978e919
 
 #### Manual
 
-- [x] 2.M No manual steps — page wiring in Phase 3
+- [x] 2.M No manual steps — page wiring in Phase 3 — 978e919
 
 ### Phase 3: /expenses Page, Middleware, and Dashboard Link
 
 #### Automated
 
-- [ ] 3.1 Create `src/pages/expenses.astro`
-- [ ] 3.2 Add `"/expenses"` to `PROTECTED_ROUTES` in `src/middleware.ts`
-- [ ] 3.3 Add "View expenses" link to `src/pages/dashboard.astro`
-- [ ] 3.4 `npm run lint && npm run build` exits 0
+- [x] 3.1 Create `src/pages/expenses.astro`
+- [x] 3.2 Add `"/expenses"` to `PROTECTED_ROUTES` in `src/middleware.ts`
+- [x] 3.3 Add "View expenses" link to `src/pages/dashboard.astro`
+- [x] 3.4 `npm run lint && npm run build` exits 0
 
 #### Manual
 
-- [ ] 3.M1 Unauthenticated visit to `/expenses` redirects to `/auth/signin`
-- [ ] 3.M2 Expense list renders with date, category name, and amount per row
-- [ ] 3.M3 Month navigation changes the displayed month without page reload
-- [ ] 3.M4 Category filter shows only expenses in the selected category
-- [ ] 3.M5 Editing an expense updates the list after save
-- [ ] 3.M6 Invalid edit (empty or zero amount) shows an error banner
-- [ ] 3.M7 Delete confirmation (Confirm?/Cancel) removes the expense on confirm
-- [ ] 3.M8 Empty month shows "No expenses this month."
-- [ ] 3.M9 "View expenses" link on dashboard navigates to `/expenses`
+- [x] 3.M1 Unauthenticated visit to `/expenses` redirects to `/auth/signin`
+- [x] 3.M2 Expense list renders with date, category name, and amount per row
+- [x] 3.M3 Month navigation changes the displayed month without page reload
+- [x] 3.M4 Category filter shows only expenses in the selected category
+- [x] 3.M5 Editing an expense updates the list after save
+- [x] 3.M6 Invalid edit (empty or zero amount) shows an error banner
+- [x] 3.M7 Delete confirmation (Confirm?/Cancel) removes the expense on confirm
+- [x] 3.M8 Empty month shows "No expenses this month."
+- [x] 3.M9 "View expenses" link on dashboard navigates to `/expenses`

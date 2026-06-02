@@ -25,6 +25,7 @@ export function ExpenseList({ initialExpenses, categories, initialYear, initialM
 
   const categoryOptions = categories.map((c) => ({ value: c.id, label: c.name }));
 
+  // Callers use void — this function must never throw externally.
   async function fetchExpenses(y: number, m: number, catId: string | null) {
     setLoading(true);
     setError(null);
@@ -36,8 +37,12 @@ export function ExpenseList({ initialExpenses, categories, initialYear, initialM
         setError("Failed to load expenses.");
         return;
       }
-      const data = (await res.json()) as ExpenseWithCategory[];
-      setExpenses(data);
+      const data = (await res.json()) as unknown;
+      if (!Array.isArray(data)) {
+        setError("Unexpected server response.");
+        return;
+      }
+      setExpenses(data as ExpenseWithCategory[]);
     } catch {
       setError("Failed to load expenses.");
     } finally {
@@ -83,6 +88,20 @@ export function ExpenseList({ initialExpenses, categories, initialYear, initialM
   }
 
   async function saveEdit(expId: string) {
+    const parsed = parseFloat(editForm.amount);
+    if (!editForm.amount.trim() || isNaN(parsed) || parsed <= 0) {
+      setError("Amount must be a positive number.");
+      return;
+    }
+    if (!editForm.category_id) {
+      setError("Please select a category.");
+      return;
+    }
+    if (!editForm.expense_date) {
+      setError("Please select a date.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("amount", editForm.amount);
     formData.append("category_id", editForm.category_id);
@@ -135,7 +154,8 @@ export function ExpenseList({ initialExpenses, categories, initialYear, initialM
       <div className="mb-4 flex items-center gap-3">
         <button
           onClick={() => void prevMonth()}
-          className="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20"
+          disabled={loading}
+          className="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20 disabled:opacity-40"
           aria-label="Previous month"
         >
           ‹
@@ -143,7 +163,8 @@ export function ExpenseList({ initialExpenses, categories, initialYear, initialM
         <span className="flex-1 text-center text-sm font-medium text-white">{monthLabel}</span>
         <button
           onClick={() => void nextMonth()}
-          className="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20"
+          disabled={loading}
+          className="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20 disabled:opacity-40"
           aria-label="Next month"
         >
           ›
@@ -155,7 +176,8 @@ export function ExpenseList({ initialExpenses, categories, initialYear, initialM
         <select
           value={categoryId ?? ""}
           onChange={(e) => void handleCategoryFilter(e.target.value)}
-          className="w-full appearance-none rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white transition-colors focus:ring-2 focus:ring-purple-400 focus:outline-none"
+          disabled={loading}
+          className="w-full appearance-none rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white transition-colors focus:ring-2 focus:ring-purple-400 focus:outline-none disabled:opacity-40"
         >
           <option value="" className="bg-gray-900 text-white">
             All categories
@@ -212,7 +234,8 @@ export function ExpenseList({ initialExpenses, categories, initialYear, initialM
                   <div className="flex gap-2">
                     <button
                       onClick={() => void saveEdit(exp.id)}
-                      className="rounded-lg bg-purple-500/80 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-purple-500"
+                      disabled={loading}
+                      className="rounded-lg bg-purple-500/80 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-purple-500 disabled:opacity-40"
                     >
                       Save
                     </button>
@@ -244,7 +267,8 @@ export function ExpenseList({ initialExpenses, categories, initialYear, initialM
                     <>
                       <button
                         onClick={() => void confirmDelete(exp.id)}
-                        className="text-xs text-red-300 transition-colors hover:text-red-200"
+                        disabled={loading}
+                        className="text-xs text-red-300 transition-colors hover:text-red-200 disabled:opacity-40"
                       >
                         Confirm?
                       </button>
