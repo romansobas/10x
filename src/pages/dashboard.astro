@@ -75,7 +75,25 @@ const monthLabel = now.toLocaleString("en-US", { month: "long", year: "numeric" 
               {breakdown.map((item) => (
                 <li class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-3">
                   <span class="text-sm font-medium text-white">{item.category_name}</span>
-                  <span class="text-sm font-semibold text-blue-200">{item.total.toFixed(2)}</span>
+                  {item.limit === undefined && (
+                    <span class="text-sm font-semibold text-blue-200">{item.total.toFixed(2)}</span>
+                  )}
+                  {item.limit !== undefined && item.total <= item.limit && (
+                    <div class="text-right">
+                      <span class="text-sm font-semibold text-blue-200">
+                        {item.total.toFixed(2)} / {item.limit.toFixed(2)}
+                      </span>
+                      <p class="text-xs text-blue-100/50">{(item.limit - item.total).toFixed(2)} remaining</p>
+                    </div>
+                  )}
+                  {item.limit !== undefined && item.total > item.limit && (
+                    <div class="text-right">
+                      <span class="text-sm font-semibold text-red-300">
+                        {item.total.toFixed(2)} / {item.limit.toFixed(2)}
+                      </span>
+                      <p class="text-xs text-red-300">+{(item.total - item.limit).toFixed(2)} over</p>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>

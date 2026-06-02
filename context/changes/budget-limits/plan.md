@@ -335,28 +335,28 @@ given the information density the sub-line provides.
 
 #### Automated
 
-- [x] 2.1 Update `src/pages/categories.astro` frontmatter to fetch and map budget limits
-- [x] 2.2 Update category row template with save form and conditional remove form
-- [x] 2.3 `npm run lint && npm run build` exits 0
+- [x] 2.1 Update `src/pages/categories.astro` frontmatter to fetch and map budget limits — 3a564cb
+- [x] 2.2 Update category row template with save form and conditional remove form — 3a564cb
+- [x] 2.3 `npm run lint && npm run build` exits 0 — 3a564cb
 
 #### Manual
 
-- [x] 2.M1 Categories page loads with a number input per category row
-- [x] 2.M2 Categories with existing limits show input pre-filled
-- [x] 2.M3 Saving a valid limit persists it (visible on reload)
-- [x] 2.M4 Saving empty or invalid amount shows error banner
-- [x] 2.M5 "Remove limit" link appears only when a limit is set and removes it on click
+- [x] 2.M1 Categories page loads with a number input per category row — 3a564cb
+- [x] 2.M2 Categories with existing limits show input pre-filled — 3a564cb
+- [x] 2.M3 Saving a valid limit persists it (visible on reload) — 3a564cb
+- [x] 2.M4 Saving empty or invalid amount shows error banner — 3a564cb
+- [x] 2.M5 "Remove limit" link appears only when a limit is set and removes it on click — 3a564cb
 
 ### Phase 3: Dashboard Overrun Markers
 
 #### Automated
 
-- [ ] 3.1 Update breakdown rendering in `src/pages/dashboard.astro`
-- [ ] 3.2 `npm run lint && npm run build` exits 0
+- [x] 3.1 Update breakdown rendering in `src/pages/dashboard.astro`
+- [x] 3.2 `npm run lint && npm run build` exits 0
 
 #### Manual
 
-- [ ] 3.M1 Category with no limit shows total only (no regression)
-- [ ] 3.M2 Under-budget category shows `total / limit` in blue + muted "X.XX remaining"
-- [ ] 3.M3 Over-budget category shows `total / limit` in red + red "+X.XX over"
-- [ ] 3.M4 Category at exactly zero spending shows `0.00 / limit` and full limit as remaining
+- [x] 3.M1 Category with no limit shows total only (no regression)
+- [x] 3.M2 Under-budget category shows `total / limit` in blue + muted "X.XX remaining"
+- [x] 3.M3 Over-budget category shows `total / limit` in red + red "+X.XX over"
+- [x] 3.M4 Category at exactly zero spending shows `0.00 / limit` and full limit as remaining
