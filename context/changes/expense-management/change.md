@@ -4,6 +4,7 @@ title: Expense list — browse by month, filter, edit, and delete
 status: implementing
 created: 2026-06-02
 updated: 2026-06-02
+
 archived_at: null
 ---
 

@@ -389,27 +389,27 @@ page's column, currently around line 84), add:
 
 #### Automated
 
-- [x] 1.1 Add `ExpenseWithCategory` to `src/types.ts`
-- [x] 1.2 Add `getMonthExpenses`, `updateExpense`, `deleteExpense` to `src/lib/services/expenses.ts`
-- [x] 1.3 Rename `src/pages/api/expenses.ts` → `src/pages/api/expenses/index.ts`
-- [x] 1.4 Add `GET` handler to `src/pages/api/expenses/index.ts`
-- [x] 1.5 Create `src/pages/api/expenses/[id].ts` with `POST` (update) and `DELETE` (delete) handlers
-- [x] 1.6 `npm run lint && npm run build` exits 0
+- [x] 1.1 Add `ExpenseWithCategory` to `src/types.ts` — f23a0e2
+- [x] 1.2 Add `getMonthExpenses`, `updateExpense`, `deleteExpense` to `src/lib/services/expenses.ts` — f23a0e2
+- [x] 1.3 Rename `src/pages/api/expenses.ts` → `src/pages/api/expenses/index.ts` — f23a0e2
+- [x] 1.4 Add `GET` handler to `src/pages/api/expenses/index.ts` — f23a0e2
+- [x] 1.5 Create `src/pages/api/expenses/[id].ts` with `POST` (update) and `DELETE` (delete) handlers — f23a0e2
+- [x] 1.6 `npm run lint && npm run build` exits 0 — f23a0e2
 
 #### Manual
 
-- [x] 1.M No manual steps — UI built in Phases 2 and 3
+- [x] 1.M No manual steps — UI built in Phases 2 and 3 — f23a0e2
 
 ### Phase 2: ExpenseList React Island
 
 #### Automated
 
-- [ ] 2.1 Create `src/components/expenses/ExpenseList.tsx` with all props, state, and behaviors
-- [ ] 2.2 `npm run lint && npm run build` exits 0
+- [x] 2.1 Create `src/components/expenses/ExpenseList.tsx` with all props, state, and behaviors
+- [x] 2.2 `npm run lint && npm run build` exits 0
 
 #### Manual
 
-- [ ] 2.M No manual steps — page wiring in Phase 3
+- [x] 2.M No manual steps — page wiring in Phase 3
 
 ### Phase 3: /expenses Page, Middleware, and Dashboard Link
 
