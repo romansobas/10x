@@ -351,12 +351,12 @@ given the information density the sub-line provides.
 
 #### Automated
 
-- [x] 3.1 Update breakdown rendering in `src/pages/dashboard.astro`
-- [x] 3.2 `npm run lint && npm run build` exits 0
+- [x] 3.1 Update breakdown rendering in `src/pages/dashboard.astro` — fefb32c
+- [x] 3.2 `npm run lint && npm run build` exits 0 — fefb32c
 
 #### Manual
 
-- [x] 3.M1 Category with no limit shows total only (no regression)
-- [x] 3.M2 Under-budget category shows `total / limit` in blue + muted "X.XX remaining"
-- [x] 3.M3 Over-budget category shows `total / limit` in red + red "+X.XX over"
-- [x] 3.M4 Category at exactly zero spending shows `0.00 / limit` and full limit as remaining
+- [x] 3.M1 Category with no limit shows total only (no regression) — fefb32c
+- [x] 3.M2 Under-budget category shows `total / limit` in blue + muted "X.XX remaining" — fefb32c
+- [x] 3.M3 Over-budget category shows `total / limit` in red + red "+X.XX over" — fefb32c
+- [x] 3.M4 Category at exactly zero spending shows `0.00 / limit` and full limit as remaining — fefb32c
