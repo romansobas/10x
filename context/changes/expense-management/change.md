@@ -1,7 +1,7 @@
 ---
 change_id: expense-management
 title: Expense list — browse by month, filter, edit, and delete
-status: implementing
+status: implemented
 created: 2026-06-02
 updated: 2026-06-02
 
