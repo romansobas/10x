@@ -1,10 +1,10 @@
 ---
 change_id: testing-infra-rls-fortress
 title: Test infra bootstrap and RLS fortress
-status: impl_reviewed
+status: archived
 created: 2026-06-03
 updated: 2026-06-03
-archived_at: null
+archived_at: 2026-06-03T08:46:53Z
 ---
 
 ## Notes
