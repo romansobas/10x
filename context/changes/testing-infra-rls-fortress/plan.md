@@ -446,9 +446,9 @@ startup conditions.
 
 #### Automated
 
-- [x] 3.1 test-plan.md §6.1 no longer contains `TBD`
-- [x] 3.2 test-plan.md §6.6 contains Phase 1 note dated 2026-06-03
+- [x] 3.1 test-plan.md §6.1 no longer contains `TBD` — aa42b23
+- [x] 3.2 test-plan.md §6.6 contains Phase 1 note dated 2026-06-03 — aa42b23
 
 #### Manual
 
-- [x] 3.3 §6.1 is followable by a new contributor without reading other files
+- [x] 3.3 §6.1 is followable by a new contributor without reading other files — aa42b23
