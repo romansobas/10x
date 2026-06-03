@@ -22,8 +22,7 @@ describe("categories RLS isolation", () => {
   });
 
   afterAll(async () => {
-    await deleteTestUser(userA.userId);
-    await deleteTestUser(userB.userId);
+    await Promise.all([deleteTestUser(userA.userId), deleteTestUser(userB.userId)]);
   });
 
   it("SELECT: User B cannot see User A categories", async () => {
@@ -47,7 +46,8 @@ describe("categories RLS isolation", () => {
       .update({ name: "hacked" })
       .eq("id", catAId);
     expect(error).toBeNull();
-    const { data } = await userA.client.from("categories").select("name").eq("id", catAId).single();
+    const { data, error: reReadError } = await userA.client.from("categories").select("name").eq("id", catAId).single();
+    expect(reReadError).toBeNull();
     expect(data?.name).toBe("User A Category");
   });
 

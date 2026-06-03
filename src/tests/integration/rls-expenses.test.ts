@@ -32,8 +32,7 @@ describe("expenses RLS isolation", () => {
   });
 
   afterAll(async () => {
-    await deleteTestUser(userA.userId);
-    await deleteTestUser(userB.userId);
+    await Promise.all([deleteTestUser(userA.userId), deleteTestUser(userB.userId)]);
   });
 
   it("SELECT: User B cannot see User A expenses", async () => {
@@ -57,7 +56,8 @@ describe("expenses RLS isolation", () => {
   it("UPDATE: User B cannot update User A expense", async () => {
     const { error } = await userB.client.from("expenses").update({ amount: 999 }).eq("id", expAId);
     expect(error).toBeNull();
-    const { data } = await userA.client.from("expenses").select("amount").eq("id", expAId).single();
+    const { data, error: reReadError } = await userA.client.from("expenses").select("amount").eq("id", expAId).single();
+    expect(reReadError).toBeNull();
     expect(Number(data?.amount)).toBe(50);
   });
 

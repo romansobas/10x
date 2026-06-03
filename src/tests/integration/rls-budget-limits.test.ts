@@ -32,8 +32,11 @@ describe("budget_limits RLS isolation", () => {
   });
 
   afterAll(async () => {
-    await deleteTestUser(userA.userId);
-    await deleteTestUser(userB.userId);
+    // The (userB, catAId) row created by the UPSERT IDOR test is cleaned up by
+    // either cascade: userA's deletion wipes catAId (ON DELETE CASCADE on category_id),
+    // or userB's deletion wipes it via user_id FK. Both run concurrently; PostgreSQL
+    // handles the concurrent delete of the same row safely.
+    await Promise.all([deleteTestUser(userA.userId), deleteTestUser(userB.userId)]);
   });
 
   it("SELECT: User B cannot see User A budget limits", async () => {
@@ -59,11 +62,12 @@ describe("budget_limits RLS isolation", () => {
       .update({ monthly_limit: 999 })
       .eq("id", limitAId);
     expect(error).toBeNull();
-    const { data } = await userA.client
+    const { data, error: reReadError } = await userA.client
       .from("budget_limits")
       .select("monthly_limit")
       .eq("id", limitAId)
       .single();
+    expect(reReadError).toBeNull();
     expect(data?.monthly_limit).toBe(100);
   });
 
