@@ -422,25 +422,25 @@ startup conditions.
 
 #### Automated
 
-- [x] 1.1 `npm install` completes without errors; vitest in package.json devDependencies
-- [x] 1.2 `npm test` runs and smoke test passes
+- [x] 1.1 `npm install` completes without errors; vitest in package.json devDependencies — f6b9683
+- [x] 1.2 `npm test` runs and smoke test passes — f6b9683
 
 #### Manual
 
-- [x] 1.3 `.env.test` is gitignored; Supabase Studio shows no orphaned smoke user after run
+- [x] 1.3 `.env.test` is gitignored; Supabase Studio shows no orphaned smoke user after run — f6b9683
 
 ### Phase 2: RLS Isolation and IDOR Tests
 
 #### Automated
 
-- [ ] 2.1 `npm test` passes all three RLS test files
-- [ ] 2.2 Each test file passes in isolation (run individually with `npx vitest run <file>`)
-- [ ] 2.3 No TypeScript errors on new test files
+- [x] 2.1 `npm test` passes all three RLS test files
+- [x] 2.2 Each test file passes in isolation (run individually with `npx vitest run <file>`)
+- [x] 2.3 No TypeScript errors on new test files
 
 #### Manual
 
-- [ ] 2.4 Test names clearly describe the invariant they protect
-- [ ] 2.5 Disabling RLS on a table causes its SELECT isolation test to fail (regression sanity check)
+- [x] 2.4 Test names clearly describe the invariant they protect
+- [x] 2.5 Disabling RLS on a table causes its SELECT isolation test to fail (regression sanity check)
 
 ### Phase 3: Cookbook Update
 
