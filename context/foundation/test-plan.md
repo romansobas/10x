@@ -6,7 +6,7 @@
 >
 > Refresh: re-run `/10x-test-plan --refresh` when stale (see §8).
 >
-> Last updated: 2026-06-02
+> Last updated: 2026-06-02 (Phase 1 change opened)
 
 ## 1. Strategy
 
@@ -67,7 +67,7 @@ orchestrator updates Status as artifacts appear on disk.
 
 | # | Phase name | Goal (one line) | Risks covered | Test types | Status | Change folder |
 |---|------------|-----------------|---------------|------------|--------|---------------|
-| 1 | Test infra bootstrap + RLS fortress | Stand up Vitest + Supabase test client; prove all three tables enforce per-user isolation for SELECT and all mutations | #1, #3 | integration (real Supabase DB) | not started | — |
+| 1 | Test infra bootstrap + RLS fortress | Stand up Vitest + Supabase test client; prove all three tables enforce per-user isolation for SELECT and all mutations | #1, #3 | integration (real Supabase DB) | change opened | context/changes/testing-infra-rls-fortress |
 | 2 | Expense CRUD correctness + error surfacing | Prove expense writes either succeed or fail visibly; prove server-side validation rejects bad inputs | #2, #5, #7 | integration (real DB) + hermetic (stub write error) | not started | — |
 | 3 | Data integrity + budget calculations | Prove category-delete constraint surfaces to user; prove overrun arithmetic is correct | #4, #6 | integration (real DB with live data) + hermetic (pure function) | not started | — |
 | 4 | Quality gates wiring | Wire test run into GitHub Actions CI; all tests must pass before merge | cross-cutting | CI configuration | not started | — |
@@ -114,7 +114,35 @@ the relevant rollout phase ships; before that, the sub-section reads
 
 ### 6.1 Adding an integration test (RLS / data isolation)
 
-TBD — see §3 Phase 1. Expected pattern: per-user RLS policy violation — prove SELECT/INSERT/UPDATE/DELETE denial for cross-user resources.
+**Canonical example:** `src/tests/integration/rls-categories.test.ts`
+
+**Location:** `src/tests/integration/rls-<table>.test.ts` — one file per table.
+
+**Lifecycle:** `beforeAll` creates two test users (User A and User B) via `createTestUser`
+from `src/tests/integration/helpers.ts`, then creates User A's test resource. `afterAll`
+calls `deleteTestUser` for both — PostgreSQL's `ON DELETE CASCADE` on `user_id →
+auth.users(id)` cleans up all rows automatically.
+
+**Five tests per file:**
+
+| Test | How to write it | What it proves |
+|------|-----------------|----------------|
+| SELECT isolation | `userB.client.from('<table>').select('id')` → assert result does not contain User A's row id | RLS USING clause blocks cross-user reads |
+| INSERT denial | `userB.client.from('<table>').insert({ user_id: userA.userId, ... })` → assert `error.code === '42501'` | RLS WITH CHECK blocks claiming another user's user_id |
+| UPDATE denial | `userB.client.from('<table>').update({...}).eq('id', resourceAId)` → assert `error === null`; re-read as User A and assert value unchanged | RLS USING filters the row from User B's update set (0 rows affected, no error) |
+| DELETE denial (direct) | `userB.client.from('<table>').delete().eq('id', resourceAId)` → assert `error === null`; re-read as User A and assert row still exists | RLS USING filters the row; 0 rows deleted, no error |
+| DELETE IDOR (service) | Call the service function (e.g. `deleteCategory(userB.client, userB.userId, resourceAId)`) → assert no throw; re-read as User A and assert row still exists | App-layer `.eq('user_id', userId)` filter prevents deletion even without RLS |
+
+**Important assertion notes:**
+- UPDATE and DELETE via RLS USING clause: Supabase returns `{ error: null }` with 0 rows affected — no error is thrown. Always follow with a re-read as User A to confirm the resource was not modified.
+- INSERT via WITH CHECK violation: Supabase returns `{ error: { code: '42501' } }`.
+- Service function IDOR tests: service functions return `void`; assert resource-intact via re-read, not error code.
+
+**Tables with FK requirements:** `expenses` and `budget_limits` require a `categories` row as a
+foreign key — create the category as User A in `beforeAll` before creating the resource under test.
+
+**Running a new file in isolation:** `npx vitest run src/tests/integration/rls-<table>.test.ts`
+(requires `npx supabase start` and `.env.test` populated from `npx supabase status`)
 
 ### 6.2 Adding an integration test (service layer / CRUD)
 
@@ -135,6 +163,14 @@ TBD — see §3 Phase 3. Expected pattern: category delete with existing expense
 ### 6.6 Per-rollout-phase notes
 
 (Each phase's final sub-phase appends a 2–3 line note here after shipping.)
+
+### Phase 1: Test infra bootstrap + RLS fortress (2026-06-03)
+
+Vitest bootstrapped (`vitest.config.ts`, `node` environment, `@/` alias). `src/tests/integration/helpers.ts`
+provides `createTestUser`/`deleteTestUser` using the admin client (service role key) + Bearer-token
+authenticated clients. Three RLS isolation test files cover categories, expenses, and budget_limits for
+SELECT/INSERT/UPDATE/DELETE cross-user denial. Service-function IDOR tests cover DELETE (and upsert)
+double-defense. Cookbook pattern: §6.1.
 
 ## 7. What We Deliberately Don't Test
 

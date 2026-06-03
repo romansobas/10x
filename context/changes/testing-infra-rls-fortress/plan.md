@@ -433,22 +433,22 @@ startup conditions.
 
 #### Automated
 
-- [x] 2.1 `npm test` passes all three RLS test files
-- [x] 2.2 Each test file passes in isolation (run individually with `npx vitest run <file>`)
-- [x] 2.3 No TypeScript errors on new test files
+- [x] 2.1 `npm test` passes all three RLS test files — e1e29ba
+- [x] 2.2 Each test file passes in isolation (run individually with `npx vitest run <file>`) — e1e29ba
+- [x] 2.3 No TypeScript errors on new test files — e1e29ba
 
 #### Manual
 
-- [x] 2.4 Test names clearly describe the invariant they protect
-- [x] 2.5 Disabling RLS on a table causes its SELECT isolation test to fail (regression sanity check)
+- [x] 2.4 Test names clearly describe the invariant they protect — e1e29ba
+- [x] 2.5 Disabling RLS on a table causes its SELECT isolation test to fail (regression sanity check) — e1e29ba
 
 ### Phase 3: Cookbook Update
 
 #### Automated
 
-- [ ] 3.1 test-plan.md §6.1 no longer contains `TBD`
-- [ ] 3.2 test-plan.md §6.6 contains Phase 1 note dated 2026-06-03
+- [x] 3.1 test-plan.md §6.1 no longer contains `TBD`
+- [x] 3.2 test-plan.md §6.6 contains Phase 1 note dated 2026-06-03
 
 #### Manual
 
-- [ ] 3.3 §6.1 is followable by a new contributor without reading other files
+- [x] 3.3 §6.1 is followable by a new contributor without reading other files
