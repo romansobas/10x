@@ -16,6 +16,7 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.test
 
 # cloudflare
 .dev.vars
@@ -28,3 +29,5 @@ pnpm-debug.log*
 .idea/
 
 /.claude/skills/
+/.claude/skills/settings.local.json
+/.claude/prompts/
