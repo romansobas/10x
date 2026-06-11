@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import ExpenseForm from "@/components/expenses/ExpenseForm";
+import { TrendingUp, Receipt, Tag } from "lucide-react";
 import { createClient } from "@/lib/supabase";
 import { getUserCategories, seedDefaultCategories } from "@/lib/services/categories";
 import { getMonthBreakdown } from "@/lib/services/expenses";
@@ -43,35 +44,52 @@ const monthLabel = now.toLocaleString("en-US", { month: "long", year: "numeric" 
       }
 
       <!-- Header -->
-      <div class="flex items-center justify-between text-white">
-        <div>
-          <h1 class="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
-            BudgetFlow
-          </h1>
-          <p class="text-sm text-blue-100/60">{user?.email}</p>
+      <div class="space-y-3 text-white">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
+              BudgetFlow
+            </h1>
+            <p class="text-sm text-blue-100/60">{user?.email}</p>
+          </div>
+          <form method="POST" action="/api/auth/signout">
+            <button
+              type="submit"
+              class="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20"
+            >
+              Sign out
+            </button>
+          </form>
         </div>
-        <form method="POST" action="/api/auth/signout">
-          <button
-            type="submit"
-            class="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20"
+        <div class="flex gap-1">
+          <a
+            href="/trends"
+            class="flex flex-1 items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-blue-100/60 transition-colors hover:bg-white/10 hover:text-white"
           >
-            Sign out
-          </button>
-        </form>
+            <TrendingUp class="h-4 w-4" />
+            Trends
+          </a>
+          <a
+            href="/expenses"
+            class="flex flex-1 items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-blue-100/60 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <Receipt class="h-4 w-4" />
+            View expenses
+          </a>
+          <a
+            href="/categories"
+            class="flex flex-1 items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-blue-100/60 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <Tag class="h-4 w-4" />
+            Manage categories
+          </a>
+        </div>
       </div>
 
       <!-- Add expense card -->
       <div class="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
         <h2 class="mb-4 text-lg font-semibold text-white">Add expense</h2>
         <ExpenseForm categories={categories} defaultError={serverError} client:load />
-      </div>
-
-      <!-- Quick links -->
-      <div class="flex justify-center gap-6">
-        <a href="/categories" class="text-sm text-blue-100/60 transition-colors hover:text-white">
-          Manage categories
-        </a>
-        <a href="/trends" class="text-sm text-blue-100/60 transition-colors hover:text-white"> Trends </a>
       </div>
 
       <!-- Month-to-date breakdown card -->
@@ -111,11 +129,6 @@ const monthLabel = now.toLocaleString("en-US", { month: "long", year: "numeric" 
             </ul>
           )
         }
-      </div>
-
-      <!-- View expenses link -->
-      <div class="text-center">
-        <a href="/expenses" class="text-sm text-blue-100/60 transition-colors hover:text-white"> View expenses </a>
       </div>
     </div>
   </div>

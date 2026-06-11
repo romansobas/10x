@@ -131,20 +131,20 @@ Add a new quick-nav panel between `<!-- Header -->` and `<!-- Add expense card -
 
 #### Automated
 
-- [x] 1.1 Integer Y-axis ticks and wider left margin in TrendsView
+- [x] 1.1 Integer Y-axis ticks and wider left margin in TrendsView — 3967a3e
 
 #### Manual
 
-- [x] 1.2 Verify Y-axis labels unclipped on /trends with real data
+- [x] 1.2 Verify Y-axis labels unclipped on /trends with real data — 3967a3e
 
 ### Phase 2: Dashboard navigation panel
 
 #### Automated
 
-- [ ] 2.1 Replace scattered links with quick-nav panel on dashboard.astro
+- [x] 2.1 Replace scattered links with quick-nav panel on dashboard.astro
 
 #### Manual
 
-- [ ] 2.2 Verify panel renders above Add expense card
-- [ ] 2.3 Verify all three links navigate correctly
-- [ ] 2.4 Verify no overflow on 390px viewport
+- [x] 2.2 Verify panel renders above Add expense card
+- [x] 2.3 Verify all three links navigate correctly
+- [x] 2.4 Verify no overflow on 390px viewport
