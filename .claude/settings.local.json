@@ -29,7 +29,9 @@
       "Bash(bash /private/var/www/10x/.claude/hooks/lint.sh)",
       "Bash(echo \"Exit: $?\")",
       "Bash(bash /private/var/www/10x/.claude/hooks/typecheck.sh)",
-      "Bash(bash -c ' *)"
+      "Bash(bash -c ' *)",
+      "Bash(gh auth *)",
+      "Bash(ssh -T git@github.com)"
     ],
     "deny": [
       "Bash(rm -rf *)"
