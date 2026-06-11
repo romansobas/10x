@@ -231,14 +231,14 @@ export const POST: APIRoute = async (context) => {
 
 #### Automated
 
-- [x] 2.1 "Forgot password?" link in SignInForm
-- [x] 2.2 Forgot-password page and form component
-- [x] 2.3 POST /api/auth/forgot-password endpoint
-- [x] 2.4 Password-reset-sent confirmation page
-- [x] 2.5 Update-password page and form component
-- [x] 2.6 POST /api/auth/update-password endpoint
+- [x] 2.1 "Forgot password?" link in SignInForm — f8e1462
+- [x] 2.2 Forgot-password page and form component — f8e1462
+- [x] 2.3 POST /api/auth/forgot-password endpoint — f8e1462
+- [x] 2.4 Password-reset-sent confirmation page — f8e1462
+- [x] 2.5 Update-password page and form component — f8e1462
+- [x] 2.6 POST /api/auth/update-password endpoint — f8e1462
 
 #### Manual
 
-- [x] 2.7 Verify reset email arrives and link opens update-password page
-- [x] 2.8 Verify Supabase redirect URL is whitelisted in project settings
+- [x] 2.7 Verify reset email arrives and link opens update-password page — f8e1462
+- [x] 2.8 Verify Supabase redirect URL is whitelisted in project settings — f8e1462

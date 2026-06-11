@@ -1,7 +1,7 @@
 ---
 change_id: auth-extended
 title: Extended auth — guest access and password reset
-status: implementing
+status: implemented
 created: 2026-06-11
 updated: 2026-06-11
 archived_at: null
