@@ -141,10 +141,10 @@ Add a new quick-nav panel between `<!-- Header -->` and `<!-- Add expense card -
 
 #### Automated
 
-- [x] 2.1 Replace scattered links with quick-nav panel on dashboard.astro
+- [x] 2.1 Replace scattered links with quick-nav panel on dashboard.astro — 357280f
 
 #### Manual
 
-- [x] 2.2 Verify panel renders above Add expense card
-- [x] 2.3 Verify all three links navigate correctly
-- [x] 2.4 Verify no overflow on 390px viewport
+- [x] 2.2 Verify panel renders above Add expense card — 357280f
+- [x] 2.3 Verify all three links navigate correctly — 357280f
+- [x] 2.4 Verify no overflow on 390px viewport — 357280f
