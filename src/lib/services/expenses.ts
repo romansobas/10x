@@ -103,6 +103,62 @@ export async function getMonthExpenses(
   }));
 }
 
+export interface MonthlyBreakdownEntry {
+  year: number;
+  month: number; // 1-12
+  label: string; // e.g. "Jun 2026"
+  total: number;
+  breakdown: CategoryTotal[];
+}
+
+export async function getAllMonthlyBreakdowns(
+  supabase: SupabaseClient<Database>,
+  userId: string,
+): Promise<MonthlyBreakdownEntry[]> {
+  const [expensesResult, categoriesResult, limitsResult] = await Promise.all([
+    supabase.from("expenses").select("amount, category_id, expense_date").eq("user_id", userId),
+    supabase.from("categories").select("id, name").eq("user_id", userId),
+    supabase.from("budget_limits").select("category_id, monthly_limit").eq("user_id", userId),
+  ]);
+
+  if (expensesResult.error) throw expensesResult.error;
+  if (categoriesResult.error) throw categoriesResult.error;
+  if (limitsResult.error) throw limitsResult.error;
+
+  const catMap = new Map(categoriesResult.data.map((c) => [c.id, c.name]));
+  const limitsMap = new Map(limitsResult.data.map((l) => [l.category_id, l.monthly_limit]));
+
+  const byMonth = new Map<string, Map<string, number>>();
+  for (const exp of expensesResult.data) {
+    const key = exp.expense_date.slice(0, 7); // "YYYY-MM"
+    let cats = byMonth.get(key);
+    if (!cats) {
+      cats = new Map();
+      byMonth.set(key, cats);
+    }
+    cats.set(exp.category_id, (cats.get(exp.category_id) ?? 0) + parseFloat(String(exp.amount)));
+  }
+
+  return Array.from(byMonth.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([key, cats]) => {
+      const [yearStr, monthStr] = key.split("-");
+      const year = parseInt(yearStr);
+      const month = parseInt(monthStr);
+      const label = new Date(year, month - 1).toLocaleString("en-US", { month: "short", year: "numeric" });
+      const breakdown: CategoryTotal[] = Array.from(cats.entries())
+        .map(([category_id, total]) => ({
+          category_id,
+          category_name: catMap.get(category_id) ?? "Unknown",
+          total,
+          limit: limitsMap.get(category_id),
+        }))
+        .sort((a, b) => b.total - a.total);
+      const total = breakdown.reduce((sum, c) => sum + c.total, 0);
+      return { year, month, label, total, breakdown };
+    });
+}
+
 export async function updateExpense(
   supabase: SupabaseClient<Database>,
   userId: string,
