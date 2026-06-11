@@ -17,7 +17,19 @@
       "Edit",
       "Write",
       "Bash(git reset *)",
-      "Bash(echo \"EXIT:$?\")"
+      "Bash(echo \"EXIT:$?\")",
+      "Skill(10x-impl-review)",
+      "Bash(echo \"exit:$?\")",
+      "Bash(grep -v \"^$\")",
+      "Skill(10x-plan)",
+      "Bash(git *)",
+      "Bash(echo \"ESLint exit: $?\")",
+      "Bash(echo \"TSC exit: $?\")",
+      "Bash(chmod +x *)",
+      "Bash(bash /private/var/www/10x/.claude/hooks/lint.sh)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(bash /private/var/www/10x/.claude/hooks/typecheck.sh)",
+      "Bash(bash -c ' *)"
     ],
     "deny": [
       "Bash(rm -rf *)"
