@@ -1,0 +1,29 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import TrendsView from "@/components/trends/TrendsView";
+import { createClient } from "@/lib/supabase";
+import { getAllMonthlyBreakdowns } from "@/lib/services/expenses";
+import type { MonthlyBreakdownEntry } from "@/lib/services/expenses";
+
+const { user } = Astro.locals;
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+
+let monthlyData: MonthlyBreakdownEntry[] = [];
+if (supabase && user) {
+  monthlyData = await getAllMonthlyBreakdowns(supabase, user.id);
+}
+---
+
+<Layout title="Trends — BudgetFlow">
+  <div class="bg-cosmic min-h-screen p-4">
+    <div class="mx-auto max-w-md space-y-6 py-6">
+      <div class="flex items-center justify-between text-white">
+        <h1 class="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
+          Trends
+        </h1>
+        <a href="/dashboard" class="text-sm text-blue-100/60 transition-colors hover:text-white">← Dashboard</a>
+      </div>
+      <TrendsView monthlyData={monthlyData} client:only="react" />
+    </div>
+  </div>
+</Layout>

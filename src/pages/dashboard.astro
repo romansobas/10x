@@ -66,11 +66,12 @@ const monthLabel = now.toLocaleString("en-US", { month: "long", year: "numeric" 
         <ExpenseForm categories={categories} defaultError={serverError} client:load />
       </div>
 
-      <!-- Manage categories link -->
-      <div class="text-center">
+      <!-- Quick links -->
+      <div class="flex justify-center gap-6">
         <a href="/categories" class="text-sm text-blue-100/60 transition-colors hover:text-white">
           Manage categories
         </a>
+        <a href="/trends" class="text-sm text-blue-100/60 transition-colors hover:text-white"> Trends </a>
       </div>
 
       <!-- Month-to-date breakdown card -->
