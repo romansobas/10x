@@ -31,6 +31,17 @@ const monthLabel = now.toLocaleString("en-US", { month: "long", year: "numeric" 
 <Layout title="Dashboard — BudgetFlow">
   <div class="bg-cosmic min-h-screen p-4">
     <div class="mx-auto max-w-md space-y-6 py-6">
+      {
+        user?.is_anonymous && (
+          <div class="flex items-center justify-between rounded-xl border border-blue-400/30 bg-blue-500/10 px-4 py-3 text-sm text-blue-100 backdrop-blur-xl">
+            <span>⚡ You're exploring as a guest. Create an account to save your data.</span>
+            <a href="/auth/signup" class="ml-4 shrink-0 font-medium text-purple-300 hover:underline">
+              Create account →
+            </a>
+          </div>
+        )
+      }
+
       <!-- Header -->
       <div class="flex items-center justify-between text-white">
         <div>
