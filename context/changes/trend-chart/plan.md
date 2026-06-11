@@ -278,15 +278,15 @@ Add a "Trends" link in the quick-links row (alongside "Manage categories" and "V
 
 #### Automated
 
-- [x] 2.1 Install Recharts
-- [x] 2.2 TrendsView React island
-- [x] 2.3 trends.astro server page
-- [x] 2.4 Add /trends to PROTECTED_ROUTES
-- [x] 2.5 Add Trends link to Topbar
-- [x] 2.6 Add Trends link to dashboard
+- [x] 2.1 Install Recharts — 2673a09
+- [x] 2.2 TrendsView React island — 2673a09
+- [x] 2.3 trends.astro server page — 2673a09
+- [x] 2.4 Add /trends to PROTECTED_ROUTES — 2673a09
+- [x] 2.5 Add Trends link to Topbar — 2673a09
+- [x] 2.6 Add Trends link to dashboard — 2673a09
 
 #### Manual
 
-- [x] 2.7 Verify trend chart renders with real data
-- [x] 2.8 Verify drill-down comparison updates on month selection
-- [x] 2.9 Verify no horizontal overflow on mobile width
+- [x] 2.7 Verify trend chart renders with real data — 2673a09
+- [x] 2.8 Verify drill-down comparison updates on month selection — 2673a09
+- [x] 2.9 Verify no horizontal overflow on mobile width — 2673a09

@@ -1,7 +1,7 @@
 ---
 change_id: trend-chart
 title: Trend chart — monthly overview and two-month drill-down
-status: implementing
+status: implemented
 created: 2026-06-11
 updated: 2026-06-11
 archived_at: null
