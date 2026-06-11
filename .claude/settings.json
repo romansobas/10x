@@ -1,0 +1,24 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /private/var/www/10x/.claude/hooks/lint.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /private/var/www/10x/.claude/hooks/typecheck.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
