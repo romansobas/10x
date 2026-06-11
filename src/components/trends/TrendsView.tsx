@@ -62,10 +62,10 @@ export default function TrendsView({ monthlyData }: Props) {
       <div className="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
         <h2 className="mb-4 text-lg font-semibold text-white">Spending over time</h2>
         <ResponsiveContainer width="100%" height={220}>
-          <BarChart data={trendData} margin={{ top: 4, right: 4, left: -16, bottom: 0 }}>
+          <BarChart data={trendData} margin={{ top: 4, right: 4, left: 8, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={chartGridStyle} />
             <XAxis dataKey="label" tick={tickStyle} />
-            <YAxis tickFormatter={fmt} tick={tickStyle} />
+            <YAxis tickFormatter={(v: number) => Math.round(v).toString()} tick={tickStyle} />
             <Tooltip
               formatter={(v) => [fmt(v as TooltipValue), "Total"]}
               {...tooltipStyle}
@@ -108,7 +108,7 @@ export default function TrendsView({ monthlyData }: Props) {
             </select>
           </div>
           <ResponsiveContainer width="100%" height={220}>
-            <BarChart data={drillData} margin={{ top: 4, right: 4, left: -16, bottom: 0 }}>
+            <BarChart data={drillData} margin={{ top: 4, right: 4, left: 8, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke={chartGridStyle} />
               <XAxis dataKey="name" tick={{ ...tickStyle, fontSize: 10 }} />
               <YAxis tickFormatter={fmt} tick={tickStyle} />
